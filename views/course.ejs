@@ -1,0 +1,27 @@
+
+
+<div class="row">
+  <!-- 课程信息 -->
+  <div class="col-12 mb-4">
+    <h1><%= course.name %></h1>
+    <p class="text-muted"><%= course.description %></p>
+  </div>
+
+  <!-- 章节列表 -->
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">章节列表</h5>
+      </div>
+      <ul class="list-group list-group-flush">
+        <% course.chapters.forEach(chapter => { %>
+          <li class="list-group-item">
+            <a href="/chapter/<%= chapter.id %>" class="text-decoration-none">
+              <%= chapter.sort %>. <%= chapter.title %>
+            </a>
+          </li>
+        <% }) %>
+      </ul>
+    </div>
+  </div>
+</div>

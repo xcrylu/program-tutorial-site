@@ -1,0 +1,42 @@
+/* 章节内容样式 */
+.content h2 {
+  color: #2c3e50;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
+.content h3 {
+  color: #34495e;
+  margin-top: 1.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.content p {
+  margin-bottom: 1rem;
+  line-height: 1.8;
+}
+
+.content ol, .content ul {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+.content li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+.content code {
+  background-color: #f8f9fa;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.2rem;
+  font-family: "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
+}
+
+/* 卡片hover效果 */
+.card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}

@@ -1,0 +1,43 @@
+
+
+<div class="row">
+  <!-- 左侧章节导航 -->
+  <div class="col-md-3 mb-4">
+    <div class="card sticky-top" style="top: 20px;">
+      <div class="card-header bg-secondary text-white">
+        <h6 class="mb-0"><a href="/course/<%= course.alias %>" class="text-white text-decoration-none"><%= course.name %></a></h6>
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <!-- 此处需查询该课程的所有章节（简化版可省略，实际项目需补充） -->
+          <li class="list-group-item active"><%= chapter.title %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 右侧章节内容 -->
+  <div class="col-md-9">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="mb-4"><%= chapter.title %></h2>
+        <!-- 章节内容（HTML 格式，直接渲染） -->
+        <div class="content">
+          <%- chapter.content %>
+        </div>
+
+        <!-- 上一章/下一章导航 -->
+        <div class="d-flex justify-content-between mt-5">
+          <a href="<%= chapter.prevChapter ? '/chapter/' + chapter.prevChapter.id : 'javascript:;' %>" 
+             class="btn btn-outline-primary <%= !chapter.prevChapter ? 'disabled' : '' %>">
+            上一章：<%= chapter.prevChapter ? chapter.prevChapter.title : '无' %>
+          </a>
+          <a href="<%= chapter.nextChapter ? '/chapter/' + chapter.nextChapter.id : 'javascript:;' %>" 
+             class="btn btn-outline-primary <%= !chapter.nextChapter ? 'disabled' : '' %>">
+            下一章：<%= chapter.nextChapter ? chapter.nextChapter.title : '无' %>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
