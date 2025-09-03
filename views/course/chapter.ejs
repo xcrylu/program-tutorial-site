@@ -10,7 +10,14 @@
       <div class="card-body p-0">
         <ul class="list-group list-group-flush">
           <!-- 此处需查询该课程的所有章节（简化版可省略，实际项目需补充） -->
-          <li class="list-group-item active"><%= chapter.title %></li>
+           <% chapter.chapters.forEach(chap => { %>
+            <li class="list-group-item <%= chap.id === chapter.id ? 'active' : '' %>">
+              <a href="/chapter/<%= chap.id %>" class="text-decoration-none <%= chap.id === chapter.id ? 'text-white' : '' %>">
+                <%= chap.title %>
+              </a>
+            </li>
+           <% }) %>
+          <!-- <li class="list-group-item active"><%= chapter.title %></li> -->
         </ul>
       </div>
     </div>

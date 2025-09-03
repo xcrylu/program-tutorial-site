@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const courseModel = require('../models/courseModel');
+const { optionalAuthenticate } = require('../middleware/auth');
 
 // 首页：展示所有课程
-router.get('/', async (req, res) => {
+router.get('/', optionalAuthenticate ,async (req, res) => {
   try {
     const courses = await courseModel.getAllCourses();
     // 渲染首页模板，传递课程数据

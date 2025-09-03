@@ -1,4 +1,14 @@
-# JWT 配置
-JWT_SECRET='cR4-tP7?kS9}zE2?zR7>' # 替换为随机字符串
-JWT_EXPIRES_IN=7d # 令牌有效期7天
-JWT_COOKIE_EXPIRES=7 # Cookie有效期7天
+require('dotenv').config();
+
+module.exports = {
+  jwt: {
+    secret: process.env.JWT_SECRET,
+    expiresIn: process.env.JWT_EXPIRES_IN,
+    cookieExpires: process.env.JWT_COOKIE_EXPIRES
+  },
+  roles: {
+    admin: 1,
+    user: 2,
+    guest: 3
+  }
+};

@@ -1,0 +1,48 @@
+
+
+<div class="card">
+    <div class="card-body">
+        <% if (errors && errors.length > 0) { %>
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    <% errors.forEach(error => { %>
+                        <li><%= error.msg %></li>
+                    <% }) %>
+                </ul>
+            </div>
+        <% } %>
+        
+        <form action="<%= course.id ? '/admin/courses/' + course.id : '/admin/courses' %>" method="post">
+            <div class="mb-3">
+                <label for="name" class="form-label">课程名称</label>
+                <input type="text" class="form-control" id="name" name="name" 
+                       value="<%= course.name || '' %>" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="alias" class="form-label">课程别名（URL中使用，小写字母和横线）</label>
+                <input type="text" class="form-control" id="alias" name="alias" 
+                       value="<%= course.alias || '' %>" 
+                       pattern="[a-z0-9-]+" title="只能包含小写字母、数字和横线" required>
+                <div class="form-text">用于URL访问，如"python-basics"</div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="description" class="form-label">课程简介</label>
+                <textarea class="form-control" id="description" name="description" rows="3" required><%= course.description || '' %></textarea>
+            </div>
+            
+            <div class="mb-3">
+                <label for="cover" class="form-label">封面图片URL</label>
+                <input type="text" class="form-control" id="cover" name="cover" 
+                       value="<%= course.cover || 'default-cover.jpg' %>">
+                <div class="form-text">留空将使用默认封面</div>
+            </div>
+            
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">保存</button>
+                <a href="/admin/courses" class="btn btn-secondary ms-2">取消</a>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,82 +1,7 @@
 
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= title %></title>
-  <!-- 引入 Bootstrap 简化样式（CDN） -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- 引入 Bootstrap JS（含 Popper） -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- 引入 Bootstrap Icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="/css/style.css">
-  <script src="/js/main.js"></script>
-</head>
-<body>
-  <!-- 导航栏 -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-      <a class="navbar-brand" href="/">编程教程网
-        <image src="/images/logo.png" alt="Logo" style="height:30px; margin-left:10px;">
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav me-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="/">首页</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/course/python">Python 教程</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/course/c">C 语言教程</a>
-          </li>
-          <% if (user && user.role_name === 'admin') { %>
-            <li class="nav-item">
-              <a class="nav-link" href="/admin">管理后台</a>
-            </li>
-          <% } %>
-        </ul>
-        
-        <ul class="navbar-nav">
-          <% if (user) { %>
-            <!-- 已登录状态 -->
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                <img src="/images/<%= user.avatar %>" alt="头像" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 5px;">
-                <%= user.username %>
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="/profile">个人资料</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="/logout">退出登录</a></li>
-              </ul>
-            </li>
-          <% } else { %>
-            <!-- 未登录状态 -->
-            <li class="nav-item">
-              <a class="nav-link" href="/login">登录</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/register">注册</a>
-            </li>
-          <% } %>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <!-- 页面内容 -->
-  <div class="container-fluid mt-4">
+<div class="container-fluid mt-4">
     <div class="row">
-
-         <% if (user && user.role_name === 'admin') { %>
         <!-- 侧边栏 -->
-
         <div class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
             <div class="position-sticky pt-3">
                 <ul class="nav flex-column">
@@ -113,13 +38,13 @@
                 </ul>
             </div>
         </div>
-        <% } %>
+
         <!-- 主内容区 -->
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <!-- 顶部导航 -->
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2"><%= title %></h1>
-                <div class="btn-toolbar mb-2 mb-md-0"> 
+                <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group me-2">
                         <% if (req.path.startsWith('/admin/users')) { %>
                             <a href="/admin/users/create" class="btn btn-sm btn-outline-secondary">
@@ -156,12 +81,6 @@
         </main>
     </div>
 </div>
-  
-  <!-- 页脚  -->
-  <footer class="bg-light py-3 mt-5">
-    <div class="container text-center">
-      <p class="mb-0">© 2025 编程教程网 - 仿照菜鸟教程搭建</p>
-    </div>
-  </footer>  
-</body>
-</html>
+
+<!-- 引入 Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">

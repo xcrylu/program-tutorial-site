@@ -73,7 +73,8 @@ exports.authorize = (...roles) => {
     if (!roles.includes(req.user.role_name)) {
       return res.status(403).render('error', {
         title: '权限不足',
-        message: '您没有足够的权限执行此操作'
+        message: '您没有足够的权限执行此操作',
+        errorStack: null
       });
     }
     
@@ -96,6 +97,40 @@ exports.guest = (req, res, next) => {
     next();
   } catch (error) {
     // 令牌无效或已过期，视为未登录
+    next();
+  }
+};
+
+// ...existing code...
+
+// 可选认证：有 token 就解析，无 token 也不报错
+exports.optionalAuthenticate = async (req, res, next) => {
+  try {
+    let token;
+    if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+      token = req.headers.authorization.split(' ')[1];
+    } else if (req.cookies && req.cookies.token) {
+      token = req.cookies.token;
+    }
+
+    if (token) {
+      const decoded = jwt.verify(token, authConfig.jwt.secret);
+      const user = await userModel.findById(decoded.id);
+      if (user) {
+        req.user = user;
+        res.locals.user = user;
+      } else {
+        req.user = null;
+        res.locals.user = null;
+      }
+    } else {
+      req.user = null;
+      res.locals.user = null;
+    }
+    next();
+  } catch (error) {
+    req.user = null;
+    res.locals.user = null;
     next();
   }
 };

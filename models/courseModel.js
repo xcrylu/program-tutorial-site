@@ -1,3 +1,4 @@
+const { get } = require('jquery');
 const { pool } = require('../config/db');
 
 // 获取所有课程列表
@@ -25,4 +26,10 @@ async function getCourseByAlias(alias) {
   return course;
 }
 
-module.exports = { getAllCourses, getCourseByAlias };
+async function getCourseById(id) {
+  const [courses] = await pool.query('SELECT name, alias FROM course WHERE id = ?' , [id]);
+  if (courses.length === 0) return null;    // 课程不存在
+  return courses;
+}   
+
+module.exports = { getAllCourses, getCourseByAlias,getCourseById };

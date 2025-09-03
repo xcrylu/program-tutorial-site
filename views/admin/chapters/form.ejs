@@ -1,0 +1,78 @@
+
+
+<div class="card">
+    <div class="card-body">
+        <% if (errors && errors.length > 0) { %>
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    <% errors.forEach(error => { %>
+                        <li><%= error.msg %></li>
+                    <% }) %>
+                </ul>
+            </div>
+        <% } %>
+        
+        <form action="<%= chapter.id ? '/admin/chapters/' + chapter.id : '/admin/chapters' %>" method="post">
+            <div class="mb-3">
+                <label for="course_id" class="form-label">所属课程</label>
+                <select class="form-select" id="course_id" name="course_id" required>
+                    <option value="">-- 选择课程 --</option>
+                    <% courses.forEach(course => { %>
+                        <option value="<%= course.id %>" 
+                            <%= (chapter.course_id || '') == course.id ? 'selected' : '' %>>
+                            <%= course.name %>
+                        </option>
+                    <% }) %>
+                </select>
+            </div>
+            
+            <div class="mb-3">
+                <label for="title" class="form-label">章节标题</label>
+                <input type="text" class="form-control" id="title" name="title" 
+                       value="<%= chapter.title || '' %>" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="sort" class="form-label">排序号</label>
+                <input type="number" class="form-control" id="sort" name="sort" 
+                       value="<%= chapter.sort || 0 %>" min="0">
+                <div class="form-text">数字越小越靠前</div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="content" class="form-label">章节内容</label>
+                <textarea class="form-control" id="content" name="content" rows="10"><%= chapter.content || '' %></textarea>
+                <div class="form-text">支持HTML格式</div>
+            </div>
+            
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">保存</button>
+                <a href="/admin/chapters" class="btn btn-secondary ms-2">取消</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 引入富文本编辑器 -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css">
+
+<script>
+$(document).ready(function() {
+    // 初始化富文本编辑器
+    $('#content').summernote({
+        height: 300,
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'italic', 'underline', 'clear']],
+            ['fontname', ['fontname']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['height', ['height']],
+            ['insert', ['link', 'picture', 'hr']],
+            ['view', ['fullscreen', 'codeview']]
+        ]
+    });
+});
+</script>

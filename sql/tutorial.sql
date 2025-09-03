@@ -62,14 +62,14 @@ VALUES (1, '<h2>Python 环境设置</h2>
 ');
 
 
--- 角色表
+-- 4. 角色表
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` INT PRIMARY KEY AUTO_INCREMENT,
   `name` VARCHAR(20) NOT NULL UNIQUE COMMENT '角色名称：admin, user, guest',
   `description` VARCHAR(100) DEFAULT NULL COMMENT '角色描述'
 );
 
--- 用户表
+-- 5. 用户表
 CREATE TABLE IF NOT EXISTS `users` (
   `id` INT PRIMARY KEY AUTO_INCREMENT,
   `username` VARCHAR(50) NOT NULL UNIQUE COMMENT '用户名',

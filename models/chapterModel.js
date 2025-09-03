@@ -16,13 +16,20 @@ async function getChapterById(chapterId) {
   const [prevChapter] = await pool.query(
     'SELECT id, title FROM chapter WHERE course_id = ? AND sort < ? ORDER BY sort DESC LIMIT 1',
     [chapter.course_id, chapter.sort]
-  );
+  );  
   chapter.prevChapter = prevChapter.length > 0 ? prevChapter[0] : null;
 
   const [nextChapter] = await pool.query(
     'SELECT id, title FROM chapter WHERE course_id = ? AND sort > ? ORDER BY sort ASC LIMIT 1',
     [chapter.course_id, chapter.sort]
   );
+// 4. 获取同意课程的所有章节
+   const [allChapters] = await pool.query(
+    'SELECT id, title FROM chapter WHERE course_id = ? ORDER BY sort ASC',
+    [chapter.course_id]
+  );  
+  chapter.chapters = allChapters;
+
   chapter.nextChapter = nextChapter.length > 0 ? nextChapter[0] : null;
 
   return chapter;

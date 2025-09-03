@@ -1,0 +1,63 @@
+
+
+<div class="card">
+    <div class="card-body">
+        <% if (errors && errors.length > 0) { %>
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    <% errors.forEach(error => { %>
+                        <li><%= error.msg %></li>
+                    <% }) %>
+                </ul>
+            </div>
+        <% } %>
+        
+        <form action="<%= user.id ? '/admin/users/' + user.id : '/admin/users' %>" method="post">
+            <div class="mb-3">
+                <label for="username" class="form-label">用户名</label>
+                <input type="text" class="form-control" id="username" name="username" 
+                       value="<%= user.username || '' %>" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="email" class="form-label">邮箱</label>
+                <input type="email" class="form-control" id="email" name="email" 
+                       value="<%= user.email || '' %>" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="password" class="form-label">
+                    <%= user.id ? '密码（不修改请留空）' : '密码' %>
+                </label>
+                <input type="password" class="form-control" id="password" name="password" 
+                       <%= !user.id ? 'required' : '' %>>
+                <div class="form-text">密码长度不能少于6个字符</div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="role_id" class="form-label">角色</label>
+                <select class="form-select" id="role_id" name="role_id" required>
+                    <% roles.forEach(role => { %>
+                        <option value="<%= role.id %>" 
+                            <%= (user.role_id || '') == role.id ? 'selected' : '' %>>
+                            <%= role.name === 'admin' ? '管理员' : role.name === 'user' ? '普通用户' : '游客' %>
+                        </option>
+                    <% }) %>
+                </select>
+            </div>
+            
+            <div class="mb-3">
+                <label for="status" class="form-label">状态</label>
+                <select class="form-select" id="status" name="status" required>
+                    <option value="1" <%= (user.status || 1) == 1 ? 'selected' : '' %>>正常</option>
+                    <option value="0" <%= (user.status || 1) == 0 ? 'selected' : '' %>>禁用</option>
+                </select>
+            </div>
+            
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">保存</button>
+                <a href="/admin/users" class="btn btn-secondary ms-2">取消</a>
+            </div>
+        </form>
+    </div>
+</div>

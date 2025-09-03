@@ -1,0 +1,81 @@
+
+
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">用户注册</h4>
+      </div>
+      <div class="card-body">
+        <% if (errors && errors.length > 0) { %>
+          <div class="alert alert-danger">
+            <ul class="mb-0">
+              <% errors.forEach(error => { %>
+                <li><%= error.msg %></li>
+              <% }) %>
+            </ul>
+          </div>
+        <% } %>
+        
+        <form action="/register" method="POST">
+          <div class="mb-3">
+            <label for="username" class="form-label">用户名</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="username" 
+              name="username" 
+              value="<%= oldInput.username || '' %>"
+              required
+            >
+            <small class="form-text text-muted">3-50个字符，用于登录和显示</small>
+          </div>
+          
+          <div class="mb-3">
+            <label for="email" class="form-label">邮箱</label>
+            <input 
+              type="email" 
+              class="form-control" 
+              id="email" 
+              name="email" 
+              value="<%= oldInput.email || '' %>"
+              required
+            >
+            <small class="form-text text-muted">用于找回密码和接收通知</small>
+          </div>
+          
+          <div class="mb-3">
+            <label for="password" class="form-label">密码</label>
+            <input 
+              type="password" 
+              class="form-control" 
+              id="password" 
+              name="password" 
+              required
+            >
+            <small class="form-text text-muted">至少6个字符，建议包含字母和数字</small>
+          </div>
+          
+          <div class="mb-3">
+            <label for="confirmPassword" class="form-label">确认密码</label>
+            <input 
+              type="password" 
+              class="form-control" 
+              id="confirmPassword" 
+              name="confirmPassword" 
+              required
+            >
+          </div>
+          
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary">注册</button>
+          </div>
+        </form>
+        
+        <div class="mt-3 text-center">
+          已有账号？<a href="/login">立即登录</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
